@@ -34,18 +34,6 @@ app.get('/posts/:id', (req, res) => {
 
 
 app.post('/posts',(req,res) => {
-    const schema = Joi.object({
-        title: Joi.string().min(3).required(),
-        description: Joi.string().min(3).required()
-    });
-
-    const result = schema.validate(req.body);
-    if(result.error) {
-        // 400 Bad request
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
-
     const post = {
         id : posts.length + 1,
         title: req.body.title,
@@ -65,14 +53,6 @@ app.put('/posts/:id', (req,res) => {
     if(!post) {
         res.status(404).send('The data is not found');
         return;   
-    }
-
-    const result = schema.validate(req.body);
-
-    if(result.error) {
-        // 400 Bad request
-        res.status(400).send(result.error.details[0].message);
-        return;
     }
     
     // Update data
