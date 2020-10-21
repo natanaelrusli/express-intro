@@ -16,17 +16,13 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-
-
-app.get('/api/posts', (req, res) => {
+app.get('/posts', (req, res) => {
     res.send(posts);
 });
 
-
-
 // To get a specific data
 // The URI should be like : /api/teacher/nata
-app.get('/api/post/:id', (req, res) => {
+app.get('/posts/:id', (req, res) => {
     const post = posts.find((element) => element.id === parseInt(req.params.id));
     if(!post) {
         res.status(404).send('The data is not found');
@@ -37,7 +33,7 @@ app.get('/api/post/:id', (req, res) => {
 });
 
 
-app.post('/api/posts',(req,res) => {
+app.post('/posts',(req,res) => {
     const schema = Joi.object({
         title: Joi.string().min(3).required(),
         description: Joi.string().min(3).required()
@@ -62,7 +58,7 @@ app.post('/api/posts',(req,res) => {
 
 
 
-app.put('/api/posts/:id', (req,res) => {
+app.put('/posts/:id', (req,res) => {
     // Look up the data
     // If not existing, return 404
     const post = posts.find((element) => element.id === parseInt(req.params.id));
@@ -70,13 +66,6 @@ app.put('/api/posts/:id', (req,res) => {
         res.status(404).send('The data is not found');
         return;   
     }
-
-    // Validate
-    // If invalid, return error 400
-    const schema = Joi.object({
-        title: Joi.string().min(3).required(),
-        description: Joi.string().min(3).required()
-    });
 
     const result = schema.validate(req.body);
 
@@ -92,7 +81,7 @@ app.put('/api/posts/:id', (req,res) => {
     res.send(post);
 });
 
-app.delete('/api/posts/:id', (req,res) => {
+app.delete('/posts/:id', (req,res) => {
     // Look up for the data with given id
     const post = posts.find((element) => element.id === parseInt(req.params.id));
     if(!post) {
@@ -108,14 +97,10 @@ app.delete('/api/posts/:id', (req,res) => {
     res.send(post);
 });
 
-
 // PORT
-const port = 3000;
+const port = 5000;
 
+// Creating a port listener using express.js
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
-
-
-
-
