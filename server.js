@@ -7,13 +7,13 @@ app.use(express.json());
 
 // Data array
 const posts = [
-    {id: 1, title: 'Post 1',description : 'Post Description'},
-    {id: 2, title: 'Post 2',description : 'Post Description'},
-    {id: 3, title: 'Post 3',description : 'Post Description'},
+    {id: 1, title: 'Post 1',description : 'Post Description 1'},
+    {id: 2, title: 'Post 2',description : 'Post Description 2'},
+    {id: 3, title: 'Post 3',description : 'Post Description 3'},
 ];
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('<h1>Hello World</h1>');
 });
 
 app.get('/posts', (req, res) => {
